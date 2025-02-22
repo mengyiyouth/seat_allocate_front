@@ -18,4 +18,5 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-export default api;
+export const getSeatList = () => api.get("/getSeatList");
+export const getMemberList = () => api.get("/getMemberList");

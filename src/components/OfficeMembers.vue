@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import api from "@/api/index";
+import { getMemberList } from "@/api/index";
 
 export default {
   data() {
@@ -31,17 +31,16 @@ export default {
   },
   components() {},
   mounted() {
-    this.getMemberList();
+    this.fetchMemberList();
   },
   methods: {
-    getMemberList() {
-      api
-        .get("/getMemberList")
+    fetchMemberList() {
+      getMemberList()
         .then((response) => {
           this.memberList = response.data;
         })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
+        .catch((err) => {
+          console.log("Error fetching member list ", err);
         });
     },
   },

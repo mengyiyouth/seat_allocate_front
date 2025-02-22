@@ -11,8 +11,6 @@
 </template>
 
 <script>
-import api from "@/api/index";
-
 export default {
   components: {},
   data() {
@@ -160,56 +158,13 @@ export default {
       newMemberName: "",
     };
   },
-  mounted() {
-    api
-      .get("/getSeatList")
-      .then((response) => {
-        this.seatList = response.data;
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-
-    api
-      .get("/getMemberList")
-      .then((response) => {
-        this.memberList = response.data;
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  },
+  mounted() {},
   methods: {
-    addSeat() {
-      console.log(this.seatList.length);
-      const seat = { seatNo: this.seatList.length + 1 };
-      api
-        .post("/addSeat", seat)
-        .then((response) => {
-          this.seatList = response.data;
-          console.log(response);
-        })
-        .catch((error) => {
-          console.error("Error add data:", error);
-        });
-    },
-    addMember() {
-      const member = { name: this.newMemberName };
-      api
-        .post("/addMember", member)
-        .then((response) => {
-          this.memberList = response.data;
-        })
-        .catch((error) => {
-          console.error("Error add data:", error);
-        });
-    },
     goToOfficeMembers() {
       console.log(this.$router.options.routes);
 
-      this.$router.push({ name: 'OfficeMembers' });
+      this.$router.push({ name: "OfficeMembers" });
       console.log(this.$router);
-
     },
   },
 };

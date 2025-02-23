@@ -1,7 +1,11 @@
 <template>
   <v-container>
-    <v-btn @click="goToOfficeMembers">Go to Member Detail</v-btn>
+    <v-btn @click="showMembers = !showMembers">{{
+      showMembers ? "Show Seats Allocate" : "Show Members"
+    }}</v-btn>
+    <component :is="currentComponent"></component>
     <v-data-table
+      v-if="!showMembers"
       :sort-by="sortBy"
       :headers="headers"
       :items="items"
@@ -11,10 +15,12 @@
 </template>
 
 <script>
+import OfficeMembers from "@/components/OfficeMembers.vue";
 export default {
   components: {},
   data() {
     return {
+      showMembers: false,
       sortBy: [{ key: "Monday", direction: "asc" }],
       headers: [
         {
@@ -165,6 +171,11 @@ export default {
 
       this.$router.push({ name: "OfficeMembers" });
       console.log(this.$router);
+    },
+  },
+  computed: {
+    currentComponent() {
+      return this.showMembers ? OfficeMembers : null;
     },
   },
 };
